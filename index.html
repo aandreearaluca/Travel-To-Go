@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel To Go</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="main">
+        <h1>Find inspiration for your next destination</h1>
+        <div class="container">
+            <div class="add-container">
+                <input type="text" placeholder="Where do you go next?" id="destination-input">
+                <button class="add-button" onclick="addDestination()">Add</button>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <script>
+        function addDestination() {
+            let input = document.getElementById('destination-input');
+            let text = input.value;
+            let id = text;
+
+            let newDestination = document.createElement("div");
+            newDestination.classList.add('destination');
+
+            let checkBox = document.createElement('input');
+            checkBox.type = 'checkbox';
+            checkBox.id = id;
+
+            let label = document.createElement('label');
+            label.htmlFor = id;
+            label.textContent = text;
+
+            let trash = document.createElement('img');
+            trash.classList.add('trash');
+            trash.src='images/recycling-bag.png'
+            
+
+            newDestination.append(checkBox);
+            newDestination.append(label);
+            newDestination.append(trash);
+
+
+            document.querySelector('.container').append(newDestination);
+
+            trash.addEventListener('click', onTrashClick);
+
+            input.value = '';
+        }
+
+        function onTrashClick(event) {
+            event.target.parentNode.remove();
+        }
+
+        document.querySelector('#destination-input').addEventListener('keydown', function (event) {
+            if (event.code === 'Enter') {
+                addDestination();
+            }
+        });
+    </script>
+</body>
+
+</html>
